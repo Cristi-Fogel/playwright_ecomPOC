@@ -43,6 +43,10 @@ playwright direct details: https://playwright.dev/docs/intro
 - config.ts            | used for the backend/api & path creation
 - urlbuilder.ts        | constructs url based on provided path passed
 - baseCredentaials.ts  | user credentials with valid/invalid data
+- customerDetails.ts   | customer details (includes password/mail for current iteration)
+- pageUtils.ts         | compilation for usefull utils that are to be used within tests
+- testHelpers.ts       | similar to pageUtils, but tailored to the current webpage
+- overallStrings.ts    | strings that can be used within all tests/pages
 - validationstrings.ts | strings to use on assertions
 - pageObjects.ts       | POM structure
 - playwright.config    | used to set config(run on some browser with some config)
@@ -52,3 +56,12 @@ playwright direct details: https://playwright.dev/docs/intro
 # TODO:
 1. update config file with multiple variants 
 2. add extra functionality for utils folder
+3. expand test coverage
+ - user area
+    - sign in;
+    - creat euser;
+ - products, product list;
+    - per product section tests;
+    - check actual price and discounts / sale
+ - admin interactions;
+ - training / video interactions
