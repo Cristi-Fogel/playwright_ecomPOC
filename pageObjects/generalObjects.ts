@@ -1,4 +1,4 @@
-import {Locator, Page} from '@playwright/test';
+import {expect, Locator, Page} from '@playwright/test';
 
 export class GeneralObjects{
     page:                       Page;
@@ -18,14 +18,24 @@ export class GeneralObjects{
     }
     
     async searchProduct(product: string) {
-        await this.SearchFieldInput.fill(product);
-        await this.page.keyboard.press('Enter');
-        // await this.SearchFieldButton.click();
+        try {
+            await this.SearchFieldInput.fill(product);
+            await this.page.keyboard.press('Enter');
+        } catch (error) {
+            console.error(`[searchProduct] Error occurred while searching for product "${product}":`, error);
+            throw error; // Re-throw the error after logging it
+        }
     }
 
     async goToCheckout(){
-        await this.cartProductNumber.click();
-        await this.proceedToCheckoutButton.click();
+        try{ 
+           await expect(this.cartProductNumber).toBeVisible();
+           await this.cartProductNumber.click();
+           await this.proceedToCheckoutButton.click();
+        } catch (error) {
+            console.error("[goToCheckout] Error occurred during checkout process:", error);
+            throw error; // Re-throw the error after logging it
+        }
     }
      
 }

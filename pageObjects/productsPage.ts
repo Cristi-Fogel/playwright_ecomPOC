@@ -15,24 +15,24 @@ export class ProductsPage {
     }
 
     // Hover on the first product, with enhanced error handling
-    async hoverOnFirstProduct(timeout = 5000) {
+    async hoverOnFirstProduct() {
         try {
-            await this.firstProduct.waitFor({ state: 'visible', timeout }); // Ensure it's visible before hovering
+            await this.firstProduct.waitFor({ state: 'visible' }); // Ensure it's visible before hovering
             await this.firstProduct.hover();
         } catch (error) {
-            console.error("Failed to hover on the first product:", error);
+            console.error("[hoverOnFirstProduct] Failed to hover on the first product:", error);
             throw new Error(`Hover action failed: ${error.message}`);
         }
     }
 
     // Click on the first product, ensuring visibility and better error handling
-    async clickOnFirstProduct(timeout = 5000) {
+    async clickOnFirstProduct() {
         try {
-            await this.firstProduct.waitFor({ state: 'visible', timeout }); // Ensure it's visible before clicking
+            await this.firstProduct.waitFor({ state: 'visible' }); // Ensure it's visible before clicking
             await expect(this.firstProduct).toBeVisible(); // Validate visibility explicitly
             await this.firstProduct.click();
         } catch (error) {
-            console.error("Failed to click on the first product:", error);
+            console.error("[clickOnFirstProduct] Failed to click on the first product:", error);
             throw new Error(`Click action failed: ${error.message}`);
         }
     }

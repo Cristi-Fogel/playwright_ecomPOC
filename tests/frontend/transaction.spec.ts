@@ -24,7 +24,7 @@ test('eCom - Add Product - Customer Logged in', async ({ page }) => {
   await page.waitForLoadState('networkidle');
   await productPage.addProductToCartXsBlue(); 
   await page.waitForLoadState('networkidle'); 
-  await page.waitForTimeout(5000);
+  await page.waitForTimeout(5000); // aditional loader-spinner messing up the page (flakyness mitigation)
 
   await generalObjects.goToCheckout();
   await checkoutShippingPage.shippingBestWayOption();

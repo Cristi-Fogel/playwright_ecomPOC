@@ -11,6 +11,4 @@ export class HomePage{
         this.signInButton = page.locator("//div[@class='panel header']//a[contains(text(),'Sign In')]");
         this.header = page.locator(".base");
     }
-    
-     
 }

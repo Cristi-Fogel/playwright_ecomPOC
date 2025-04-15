@@ -20,15 +20,25 @@ export class CheckoutShippingPage{
     }
     
     async shippingBestWayOption() {
-        this.shipBestWayButton.click();
-        this.nextButton.click();
-        await this.page.waitForLoadState('networkidle');
-
+        try {
+            await this.shipBestWayButton.waitFor({ state: 'visible' });
+            await this.shipBestWayButton.click();
+            await this.nextButton.click();
+            await this.page.waitForLoadState('networkidle');
+        } catch (error) {
+            throw new Error(`Failed to select the 'Best Way' shipping option: ${error.message}`);
+        }
     }
+
     async shippingFlatRateOption() {
-        this.shipFlatRateButton.click();
-        this.nextButton.click();
-        await this.page.waitForLoadState('networkidle');
+        try {
+            await this.shipFlatRateButton.waitFor({ state: 'visible' });
+            await this.shipFlatRateButton.click();
+            await this.nextButton.click();
+            await this.page.waitForLoadState('networkidle');
+        } catch (error) {
+            throw new Error(`Failed to select the 'Flat Rate' shipping option: ${error.message}`);
+        }
     }
 
  

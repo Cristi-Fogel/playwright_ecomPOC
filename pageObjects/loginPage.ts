@@ -1,4 +1,4 @@
-import {Locator, Page} from '@playwright/test';
+import {expect, Locator, Page} from '@playwright/test';
 
 export class LoginPage{
     page:                   Page;
@@ -16,9 +16,16 @@ export class LoginPage{
     }
     
     async login(username: string, password: string) {
-        await this.emailInputField.fill(username);
-        await this.passwordInputField.fill(password);
-        await this.signInButton.click();
+        try {
+            await expect(this.emailInputField).toBeVisible();
+
+            await this.emailInputField.fill(username);
+            await this.passwordInputField.fill(password);
+            await this.signInButton.click();
+        } catch (error) {
+            console.error("Failed to log in:", error);
+            throw new Error(`login failed: ${error.message}`);
+        }
     }
      
 }

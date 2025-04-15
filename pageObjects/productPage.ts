@@ -17,10 +17,19 @@ export class ProductPage{
         this.addToCartButton = page.locator("//span[normalize-space()='Add to Cart']");
         this.invalidReturnMessage = page.locator("//div[@class='message notice']//div[1]");
     }
-        async addProductToCartXsBlue() {
+    async addProductToCartXsBlue() {
+        try {
+            // Assert that the "Add to Cart" button is visible before proceeding
+            await expect(this.addToCartButton).toBeVisible();
+    
+            // Perform actions to add the product to the cart
             await this.sizeXsButton.click();
-            await this.colorblue.click(); 
+            await this.colorblue.click();
             await this.addToCartButton.click();
+        } catch (error) {
+            console.error("[addProductToCartXsBlue] Failed to add product to cart:", error);
+            throw new Error(`addProductToCartXsBlue failed: ${error.message}`);
         }
+    }
 }
     
