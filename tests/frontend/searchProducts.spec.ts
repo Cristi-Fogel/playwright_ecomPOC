@@ -38,6 +38,3 @@ test('eCom - Search Product - invalid returns message validation - empty string'
   await generalObjects.searchProduct(overallStrings.products.emptyString);
   await waitForHomePage(page);
 });
-
-
-

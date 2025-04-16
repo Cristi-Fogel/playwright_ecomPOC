@@ -2,8 +2,8 @@ import {expect, Locator, Page} from '@playwright/test';
 
 export class GeneralObjects{
     page:                       Page;
-    SearchFieldInput:           Locator;
-    SearchFieldButton:          Locator; 
+    searchFieldInput:           Locator;
+    searchFieldButton:        Locator;
     passwordInputField:         Locator;
     signInButton:               Locator;
     cartProductNumber:          Locator;
@@ -11,18 +11,28 @@ export class GeneralObjects{
 
     constructor(page: Page){
         this.page = page;
-        this.SearchFieldInput = page.locator("//input[@id='search']");
-        this.SearchFieldButton = page.locator("//input[@id='search']");
+        this.searchFieldInput = page.locator("//input[@id='search']");
+        this.searchFieldButton = page.locator("//button[@title='Search']"); //becomes enabled only after data is input
         this.cartProductNumber = page.locator("//span[@class='counter-number']")
         this.proceedToCheckoutButton = page.locator("//button[@id='top-cart-btn-checkout']");
     }
     
     async searchProduct(product: string) {
         try {
-            await this.SearchFieldInput.fill(product);
+            await this.searchFieldInput.fill(product);
             await this.page.keyboard.press('Enter');
         } catch (error) {
             console.error(`[searchProduct] Error occurred while searching for product "${product}":`, error);
+            throw error; // Re-throw the error after logging it
+        }
+    }
+
+    async searchProductClick(product: string) {
+        try {
+            await this.searchFieldInput.fill(product);
+            await this.searchFieldButton.click();
+        } catch (error) {
+            console.error(`[searchProductClick] Error occurred while searching for product "${product}":`, error);
             throw error; // Re-throw the error after logging it
         }
     }
